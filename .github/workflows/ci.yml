@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} on Windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.9', '3.11', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: 单元测试
+        run: python tests/test_rules.py
+
+      - name: 冒烟测试（只读扫描，不删除任何文件）
+        run: python cleanup.py scan --level safe --out cleanup-reports
+
+      - name: 确认默认命令不含删除逻辑
+        shell: pwsh
+        run: |
+          $out = python cleanup.py 2>&1 | Out-String
+          if ($out -notmatch '只读扫描') {
+            Write-Error "默认命令应当只做扫描，实际输出未包含只读提示"
+            exit 1
+          }
+          Write-Host "默认命令确认为只读"

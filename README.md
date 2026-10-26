@@ -10,6 +10,7 @@ python cleanup.py clean --level safe --dry-run   # 预演：告诉你将释放�
 python cleanup.py clean --level safe        # 真删，只删纯缓存
 ```
 
+![CI](https://github.com/Leslieryin/windows-disk-cleanup/actions/workflows/ci.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![python](https://img.shields.io/badge/python-3.9%2B-3776AB)
 ![platform](https://img.shields.io/badge/platform-Windows-0078D4)
