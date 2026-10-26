@@ -24,11 +24,9 @@ python cleanup.py clean --level safe        # 真删，只删纯缓存
 
 规则按「删掉会不会丢东西」分三级，不是按"能腾出多少空间"排的：
 
-| 等级 | 含义 | 典型内容 | 默认行为 |
-|---|---|---|---|
-| `safe` | 纯缓存，删了立刻重新生成，无副作用 | 用户 Temp、浏览器 Cache/Code Cache、npm/pip 缓存、缩略图缓存 | `clean --level safe` 可清 |
-| `caution` | 系统/驱动缓存，会重建但**暂时变慢** | NVIDIA 着色器缓存、DirectX 缓存、Prefetch | 需要显式 `--level caution` |
-| `risky` | 涉及系统服务，文件常被占用 | `%WINDIR%\Temp`、`%WINDIR%\Logs`、Windows 更新下载缓存 | 需要 `--level risky --yes` 双确认 |
+- **`safe`** —— 纯缓存，删了立刻重新生成，无副作用。用户 Temp、浏览器 Cache/Code Cache、npm/pip 缓存、缩略图缓存。`clean --level safe` 可清。
+- **`caution`** —— 系统/驱动缓存，会重建但**暂时变慢**。NVIDIA 着色器缓存、DirectX 缓存、Prefetch。需要显式 `--level caution`。
+- **`risky`** —— 涉及系统服务，文件常被占用。`%WINDIR%\Temp`、`%WINDIR%\Logs`、Windows 更新下载缓存。需要 `--level risky --yes` 双确认。
 
 几个刻意的设计：
 
@@ -42,12 +40,10 @@ python cleanup.py clean --level safe        # 真删，只删纯缓存
 
 ## 明确不碰的东西
 
-| 目标 | 为什么不动 |
-|---|---|
-| 回收站（`$Recycle.Bin`） | 里面是你删过的文件。清缓存和"替你决定永久丢弃"是两回事 |
-| 文档 / 桌面 / 图片 / 视频 | 用户数据，不属于缓存 |
-| `node_modules` / `.git` / `venv` | 项目工作区，删了要重装或丢历史 |
-| `%WINDIR%` 下除 Temp/Logs/SoftwareDistribution 外的目录 | 系统组件，误删代价过高 |
+- **回收站（`$Recycle.Bin`）** —— 里面是你删过的文件。清缓存和「替你决定永久丢弃」是两回事。
+- **文档 / 桌面 / 图片 / 视频** —— 用户数据，不属于缓存。
+- **`node_modules` / `.git` / `venv`** —— 项目工作区，删了要重装或丢历史。
+- **`%WINDIR%` 下除 Temp/Logs/SoftwareDistribution 外的目录** —— 系统组件，误删代价过高。
 
 想清回收站，用系统自带的「磁盘清理」或资源管理器——那个操作有系统级的二次确认，比任何第三方脚本都更该由你自己点。
 
