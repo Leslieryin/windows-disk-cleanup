@@ -1,5 +1,7 @@
 # windows-disk-cleanup
 
+> **EN** — A Windows disk cleanup tool built around a three-tier safety model (safe / caution / risky). Read-only by default, with a path allowlist; never touches the recycle bin, documents or photos.
+
 Windows 磁盘清理工具。**分层、可预演、默认只读。**
 
 清缓存这件事本身不难，难的是"删错了怎么办"。所以这个工具的第一条设计原则不是"能清多少"，而是**每次动手之前你都清楚地知道要删什么、为什么可以删**。
