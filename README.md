@@ -22,6 +22,10 @@ python cleanup.py clean --level safe        # 真删，只删纯缓存
 
 ---
 
+![python cleanup.py scan 的真实运行：17 个位置、1.8 GB，只读扫描，一个字节都没删](docs/demo.gif)
+
+*这是扫描本机的实际结果。报告同时落到 `cleanup-reports/`，执行清理前可以照着逐条核对。*
+
 ## 安全模型
 
 规则按「删掉会不会丢东西」分三级，不是按"能腾出多少空间"排的：
